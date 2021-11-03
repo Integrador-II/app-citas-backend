@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.citas.app.repositiry;
+package com.citas.app.repository;
 
-import com.citas.app.entity.Empleado;
+import com.citas.app.entity.Especialidad;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author Edwin Quispe
  */
-public interface EmpleadoRepository extends JpaRepository<Empleado, Long>{
+public interface EspecialidadRepository extends JpaRepository<Especialidad, Long>{
     
     
 }

@@ -6,7 +6,8 @@
 package com.citas.app;
 
 import com.citas.app.entity.Empleado;
-import com.citas.app.repositiry.EmpleadoRepository;
+import com.citas.app.repository.EmpleadoRepository;
+
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

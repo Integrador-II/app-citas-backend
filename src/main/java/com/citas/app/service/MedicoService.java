@@ -18,4 +18,6 @@ public interface MedicoService {
     public List<Medico> listarMedico();
     public Medico obtenerMedico(Long id);
     public List<Medico> buscarPorEspecialidad(Especialidad especialidad);
+    public Medico guardar(Medico medico);
+    public Medico buscar(Long idMedico);
 }

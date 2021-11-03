@@ -6,7 +6,8 @@
 package com.citas.app.service;
 
 import com.citas.app.entity.TipoAtencion;
-import com.citas.app.repositiry.TipoAtencionRepository;
+import com.citas.app.repository.TipoAtencionRepository;
+
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

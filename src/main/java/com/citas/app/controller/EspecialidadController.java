@@ -5,19 +5,29 @@
  */
 package com.citas.app.controller;
 
-import com.citas.app.entity.Especialidad;
-import com.citas.app.service.EspecialidadService;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import lombok.extern.slf4j.Slf4j;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.citas.app.dto.RespuestaApi;
+import com.citas.app.entity.Especialidad;
+import com.citas.app.service.EspecialidadService;
+import com.citas.app.util.Constantes;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  *
@@ -28,6 +38,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/especialidades")
 @CrossOrigin(origins = "*")
 public class EspecialidadController {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(EspecialidadController.class);
     
     @Autowired
     private EspecialidadService especialidadService;
@@ -53,6 +65,36 @@ public class EspecialidadController {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(especialidad);
+    }
+    
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<RespuestaApi> guardarEspecialidad(@RequestBody Especialidad especialidadRequest){
+    	try {
+    		
+    		Especialidad especialidadBD = null;
+
+            if(null == especialidadRequest){
+                return ResponseEntity.noContent().build();
+            }
+            
+            if(null == especialidadRequest.getIdEspecialidad()) {
+            	especialidadBD = especialidadService.guardar(especialidadRequest);
+            }else {
+            	Especialidad especialidadSearch = especialidadService.buscar(especialidadRequest.getIdEspecialidad());
+            	if(null == especialidadSearch) {
+            		throw new Exception("Especialidad no encontrada");
+            	}
+            	
+            	especialidadService.guardar(especialidadRequest);
+            }
+            
+            return new ResponseEntity<RespuestaApi>(new RespuestaApi(Constantes.CODIGO_RESPUESTA_GENERAL_EXITO, especialidadBD), HttpStatus.OK);
+            
+            
+    	}catch (Exception e) {
+			LOGGER.error("Error: ", e);
+			return new ResponseEntity<>(new RespuestaApi(Constantes.CODIGO_RESPUESTA_GENERAL_ERROR, null), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
     }
     
 }

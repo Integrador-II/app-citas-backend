@@ -6,7 +6,7 @@
 package com.citas.app;
 
 import com.citas.app.entity.Paciente;
-import com.citas.app.repositiry.PacienteRepository;
+import com.citas.app.repository.PacienteRepository;
 import com.citas.app.util.Constantes;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;

@@ -7,6 +7,7 @@ package com.citas.app.controller;
 
 import com.citas.app.dto.CuposDTO;
 import com.citas.app.dto.MedicoEspecialidadCuposResponseDTO;
+import com.citas.app.dto.RespuestaApi;
 import com.citas.app.entity.Cita;
 import com.citas.app.entity.Especialidad;
 import com.citas.app.entity.Medico;
@@ -22,11 +23,18 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,6 +48,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/medicos")
 @CrossOrigin(origins = "*")
 public class MedicoController {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(MedicoController.class);
     
     @Autowired
     private MedicoService medicoService;
@@ -175,7 +185,7 @@ public class MedicoController {
             
             CuposDTO cupo = new CuposDTO();
             cupo.setFecha(Utilitarios.formatoFecha(medicoHorario.getFecha(), Constantes.FORMATO_FECHA_DDMMYYYY));
-            cupo.setHoras(Utilitarios.cuposPorHora(medicoHorario.getFecha(), medicoHorario.getHoraInicio(), medicoHorario.getHoraFin(), Constantes.TIEMPO_ATENCION, 12, citasDia));
+            cupo.setHoras(Utilitarios.cuposPorHora(medicoHorario.getFecha(), medicoHorario.getHoraInicio(), medicoHorario.getHoraFin(), medicoHorario.getTiempoAtencion(), medicoHorario.getCantidadAtenciones(), citasDia));
             cuposDisponibles.add(cupo);
         }
         
@@ -183,4 +193,33 @@ public class MedicoController {
         return cuposDisponibles;
     }
     
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<RespuestaApi> guardarEspecialidad(@RequestBody Medico medicoRequest){
+    	try {
+    		
+    		Medico medicodBD = null;
+
+            if(null == medicoRequest){
+                return ResponseEntity.noContent().build();
+            }
+            
+            if(null == medicoRequest.getIdMedico()) {
+            	medicodBD = medicoService.guardar(medicoRequest);
+            }else {
+            	Medico medicoSearch = medicoService.buscar(medicoRequest.getIdMedico());
+            	if(null == medicoSearch) {
+            		throw new Exception("Medico no encontrado");
+            	}
+            	
+            	medicoService.guardar(medicoRequest);
+            }
+            
+            return new ResponseEntity<RespuestaApi>(new RespuestaApi(Constantes.CODIGO_RESPUESTA_GENERAL_EXITO, medicodBD), HttpStatus.OK);
+            
+            
+    	}catch (Exception e) {
+			LOGGER.error("Error: ", e);
+			return new ResponseEntity<>(new RespuestaApi(Constantes.CODIGO_RESPUESTA_GENERAL_ERROR, null), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+    }
 }

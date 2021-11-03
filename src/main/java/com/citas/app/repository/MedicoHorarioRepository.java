@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.citas.app.repositiry;
+package com.citas.app.repository;
 
 import com.citas.app.entity.MedicoHorario;
 import java.util.Date;

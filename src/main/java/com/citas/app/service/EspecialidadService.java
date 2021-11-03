@@ -16,5 +16,7 @@ public interface EspecialidadService {
     
     public List<Especialidad> listarEspecialidad();
     public Especialidad obtenerEspecialidad(Long id);
+    public Especialidad guardar(Especialidad especialidad);
+    public Especialidad buscar(Long idEspecialidad);
     
 }

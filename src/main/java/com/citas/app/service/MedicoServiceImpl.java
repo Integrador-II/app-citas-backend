@@ -7,8 +7,11 @@ package com.citas.app.service;
 
 import com.citas.app.entity.Especialidad;
 import com.citas.app.entity.Medico;
-import com.citas.app.repositiry.MedicoRepository;
+import com.citas.app.repository.MedicoRepository;
+
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,5 +40,18 @@ public class MedicoServiceImpl implements MedicoService{
     public List<Medico> buscarPorEspecialidad(Especialidad especialidad) {
         return medicoRepository.findByEspecialidad(especialidad);
     }
+    
+    @Override
+	public Medico guardar(Medico medico) {
+		return medicoRepository.save(medico);
+	}
+
+	@Override
+	public Medico buscar(Long idMedico) {
+		Optional<Medico> search = medicoRepository.findById(idMedico);
+		if(!search.isPresent()) return null;
+		
+		return search.get();
+	}
     
 }

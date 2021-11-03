@@ -6,7 +6,8 @@
 package com.citas.app;
 
 import com.citas.app.entity.TipoAtencion;
-import com.citas.app.repositiry.TipoAtencionRepository;
+import com.citas.app.repository.TipoAtencionRepository;
+
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

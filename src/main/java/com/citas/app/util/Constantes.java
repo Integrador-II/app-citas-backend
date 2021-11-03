@@ -23,4 +23,8 @@ public final class Constantes {
     public static final String CITA_ESTADO_RESERVADO = "R";
     public static final String CITA_ESTADO_CANCELADO = "A";
     
+	// -- Codigo Respuesta REST
+    public static final String CODIGO_RESPUESTA_GENERAL_EXITO = "OK";
+    public static final String CODIGO_RESPUESTA_GENERAL_ERROR = "ERROR";
+    
 }

@@ -41,6 +41,14 @@ public class MedicoHorario implements Serializable {
     @Column(name = "hora_fin")
     private String horaFin;
     
+    @Column(name = "cantidad_atenciones")
+    private Integer cantidadAtenciones;
+    
+
+    @Column(name = "tienda_atencion")
+    private Integer tiempoAtencion;
+    
+    
     private Date fecha;
     
     @ManyToOne(fetch = FetchType.LAZY)

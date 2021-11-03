@@ -7,7 +7,7 @@ package com.citas.app;
 
 import com.citas.app.entity.Medico;
 import com.citas.app.entity.MedicoHorario;
-import com.citas.app.repositiry.MedicoHorarioRepository;
+import com.citas.app.repository.MedicoHorarioRepository;
 import com.citas.app.util.Constantes;
 import com.citas.app.util.Utilitarios;
 import java.util.Calendar;
@@ -36,7 +36,7 @@ public class MedicoHorarioRepositoryMockTest {
         
         Long idMedico = 1L;
         Calendar calendar = Calendar.getInstance();
-        calendar.set(2021, 07-1, 30, 0, 0, 0);
+        calendar.set(2021, 10-1, 22, 0, 0, 0);
         
         List<MedicoHorario> encontradosPrev = medicoHorarioRepository.findAll();
         
@@ -44,6 +44,8 @@ public class MedicoHorarioRepositoryMockTest {
                 .horaInicio("08:00")
                 .horaFin("12:00")
                 .fecha(calendar.getTime())
+                .tiempoAtencion(20)
+                .cantidadAtenciones(10)
                 .medico(Medico.builder().idMedico(idMedico).build())
                 .build();
         

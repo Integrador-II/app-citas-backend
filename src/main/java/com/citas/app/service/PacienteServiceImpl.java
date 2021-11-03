@@ -7,7 +7,8 @@ package com.citas.app.service;
 
 import com.citas.app.entity.Especialidad;
 import com.citas.app.entity.Paciente;
-import com.citas.app.repositiry.PacienteRepository;
+import com.citas.app.repository.PacienteRepository;
+
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

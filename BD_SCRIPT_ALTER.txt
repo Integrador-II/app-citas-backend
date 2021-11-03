@@ -1,0 +1,9 @@
+ALTER TABLE `bd_citas`.`medico_horario` 
+ADD COLUMN `cantidad_atenciones` INT NOT NULL DEFAULT 0 AFTER `idmedico`;
+
+ALTER TABLE `bd_citas`.`medico_horario` 
+ADD COLUMN `tienda_atencion` INT NOT NULL DEFAULT 0 AFTER `cantidad_atenciones`;
+
+
+UPDATE `bd_citas`.`medico_horario` SET `cantidad_atenciones` = '10';
+UPDATE `bd_citas`.`medico_horario` SET `tienda_atencion` = '20';

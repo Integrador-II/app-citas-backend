@@ -9,7 +9,7 @@ import com.citas.app.entity.Cita;
 import com.citas.app.entity.Medico;
 import com.citas.app.entity.Paciente;
 import com.citas.app.entity.TipoAtencion;
-import com.citas.app.repositiry.CitaRepository;
+import com.citas.app.repository.CitaRepository;
 import com.citas.app.util.Constantes;
 import com.citas.app.util.Utilitarios;
 import java.util.Calendar;

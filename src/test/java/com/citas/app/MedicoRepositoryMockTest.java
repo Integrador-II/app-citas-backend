@@ -7,7 +7,8 @@ package com.citas.app;
 
 import com.citas.app.entity.Especialidad;
 import com.citas.app.entity.Medico;
-import com.citas.app.repositiry.MedicoRepository;
+import com.citas.app.repository.MedicoRepository;
+
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
