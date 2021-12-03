@@ -31,16 +31,16 @@ public class MedicoRepositoryMockTest {
     @Test
     public void whenFindByEspecialidad_thenReturnListMedico(){
         
-        Long idEspecialidad = 1L;
+        Long idEspecialidad = 2L;
         
         List<Medico> encontradosPrev = medicoRepository.findByEspecialidad(Especialidad.builder().idEspecialidad(idEspecialidad).build());
         
         Medico medico01 = Medico.builder()
-                .nombre("Karina")
-                .apellidoPaterno("Huiman")
+                .nombre("Rodolfo")
+                .apellidoPaterno("Espinoza")
                 .apellidoMaterno("Siaden")
                 .tipoDocumento("01")
-                .numeroDocumento("495511140")
+                .numeroDocumento("78454789")
                 .especialidad(Especialidad.builder().idEspecialidad(idEspecialidad).build())
                 .build();
         

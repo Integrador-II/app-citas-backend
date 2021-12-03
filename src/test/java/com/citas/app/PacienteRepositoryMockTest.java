@@ -33,22 +33,21 @@ public class PacienteRepositoryMockTest {
         List<Paciente> encontradosPrev = pacienteRepository.findAll();
         
         Paciente paciente01 = Paciente.builder()
-                .nombre("Edwin")
-                .apellidoPaterno("Quispe")
-                .apellidoMaterno("Ramos")
+                .nombre("Alberto")
+                .apellidoPaterno("Rojas")
+                .apellidoMaterno("Quiroz")
                 .tipoDocumento("01")
-                .numeroDocumento("43459267")
-                .direccion("Jr Los Ingenieros Mz K14 Lote 17")
-                .celular("973868825")
-                .correo("edwinqramos@gmail.com")
+                .numeroDocumento("479959267")
+                .direccion("Proceres")
+                .celular("98959599")
+                .correo("rojas@yopmail.com")
                 .build();
         
         pacienteRepository.save(paciente01);
         
-        
         List<Paciente> encontradosNext = pacienteRepository.findAll();
         
-        //Assertions.assertEquals(encontradosPrev.size()+1, encontradosNext.size());
+        Assertions.assertEquals(encontradosPrev.size()+1, encontradosNext.size());
         
     }
     
@@ -56,19 +55,12 @@ public class PacienteRepositoryMockTest {
     @Test
     public void buscarPorTipoNumeroDocumento_Test(){
         
-        try{
-        
-            String tipoDocumento = Constantes.TIPO_DOCUMENTO_DNI;
-            String numeroDocumento = "43459267";
+    	 String tipoDocumento = Constantes.TIPO_DOCUMENTO_DNI;
+         String numeroDocumento = "43459267";
 
-            Paciente paciente = pacienteRepository.buscarPorTipoNumeroDocumento(tipoDocumento, numeroDocumento).orElse(null);
-            System.out.println("==============OK PACIENTE==============");
-        }catch(Exception ex){
-            System.out.println("=======ERROR=======");
-            System.out.println("ex=>"+ex.getMessage());
-        }
-        
-        Assertions.assertTrue(true);
-        
+         Paciente paciente = pacienteRepository.buscarPorTipoNumeroDocumento(tipoDocumento, numeroDocumento).orElse(null);
+         
+         Assertions.assertEquals(paciente.getNumeroDocumento(), numeroDocumento);
+         
     }
 }

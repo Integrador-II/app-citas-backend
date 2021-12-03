@@ -38,9 +38,7 @@ public class EspecialidadRepositoryMockTest {
         
         especialidadRepository.save(especialidad01);
         
-        
         List<Especialidad> encontradosNext = especialidadRepository.findAll();
-        
         
         Assertions.assertEquals(encontradosPrev.size()+1, encontradosNext.size());
         

@@ -33,24 +33,19 @@ public class CitaRepositoryMockTest {
     private CitaRepository citaRepository;
     
     @Test
-    public void whenFindAll_thenReturnList(){
+    public void registroCitaTest(){
         
         Long idTipoAtencion = 1L;
-        Long idPaciente = 1L;
-        Long idMedico = 1L;
+        Long idPaciente = 14L;
+        Long idMedico = 8L;
         
         Calendar calendarReserva = Calendar.getInstance();
-        calendarReserva.set(2021, 06-1, 29, 9, 00, 0);
-        
-        String fechaFormat = Utilitarios.formatoFecha(calendarReserva.getTime(), Constantes.FORMATO_FECHA_DDMMYYYYHHMMSS);
-        System.out.println("==============================================");
-        System.out.println("==============================================");
-        System.out.println("fechaFormat=>"+fechaFormat);
+        calendarReserva.set(2021, 11-1, 8, 8, 00, 0);
         
         List<Cita> encontradosPrev = citaRepository.findAll();
         
         Cita cita01 = Cita.builder()
-                .estado("1")
+                .estado(Constantes.CITA_ESTADO_PENDIENTE_CONFIRMAR)
                 .fechaReserva(calendarReserva.getTime())
                 .tipoAtencion(TipoAtencion.builder().idTipoAtencion(idTipoAtencion).build())
                 .paciente(Paciente.builder().idPaciente(idPaciente).build())
@@ -63,26 +58,24 @@ public class CitaRepositoryMockTest {
         
         Assertions.assertEquals(encontradosPrev.size()+1, encontradosNext.size());
         
-        //Assertions.assertTrue(true);
-    
     }
     
     
     @Test
     public void buscarPorMedicoFechaDesdeTest(){
-        Long idMedico = 1L;
+        Long idMedico = 8L;
         
         Calendar calendarInicio = Calendar.getInstance();
-        calendarInicio.set(2021, 06-1, 29, 0, 0, 0);
+        calendarInicio.set(2021, 11-1, 4, 0, 0, 0);
         
         Calendar calendarFin = Calendar.getInstance();
-        calendarFin.set(2021, 06-1, 29, 23, 59, 59);
+        calendarFin.set(2021, 11-1, 4, 23, 59, 59);
         
         List<Cita> listsaCitasFecha = citaRepository.buscarCitasPorFechaMedico(idMedico, calendarInicio.getTime(), calendarFin.getTime());
         
         System.out.println("=================");
         System.out.println("listsaCitasFecha.size()==>"+listsaCitasFecha.size());
         
-        Assertions.assertTrue(true);
+        Assertions.assertTrue(listsaCitasFecha.size()>0);
     }
 }

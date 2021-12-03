@@ -51,7 +51,7 @@ public class MedicoHorario implements Serializable {
     
     private Date fecha;
     
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idmedico")
     private Medico medico;
 }

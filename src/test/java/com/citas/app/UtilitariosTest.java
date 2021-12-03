@@ -29,7 +29,7 @@ public class UtilitariosTest {
         String horaInicio =  "08:00";
         String horaFin =  "10:00";
         
-        Utilitarios.cuposPorHora(fecha, horaInicio, horaFin, 20, 5, null);
+        //Utilitarios.cuposPorHora(fecha, horaInicio, horaFin, 20, 5, null);
     }
     
     @Test

@@ -5,20 +5,21 @@
  */
 package com.citas.app;
 
-import com.citas.app.entity.Medico;
-import com.citas.app.entity.MedicoHorario;
-import com.citas.app.repository.MedicoHorarioRepository;
-import com.citas.app.util.Constantes;
-import com.citas.app.util.Utilitarios;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
+
+import org.junit.FixMethodOrder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import com.citas.app.entity.Medico;
+import com.citas.app.entity.MedicoHorario;
+import com.citas.app.repository.MedicoHorarioRepository;
 
 /**
  *
@@ -26,17 +27,19 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class MedicoHorarioRepositoryMockTest {
     
     @Autowired
     private MedicoHorarioRepository medicoHorarioRepository;
     
+    
     @Test
-    public void whenFindAll_thenReturnList(){
+    public void registroNuevoHorario(){
         
-        Long idMedico = 1L;
+        Long idMedico = 8L;
         Calendar calendar = Calendar.getInstance();
-        calendar.set(2021, 10-1, 22, 0, 0, 0);
+        calendar.set(2021, 12-1, 3, 0, 0, 0);
         
         List<MedicoHorario> encontradosPrev = medicoHorarioRepository.findAll();
         
@@ -55,18 +58,18 @@ public class MedicoHorarioRepositoryMockTest {
         
         Assertions.assertEquals(encontradosPrev.size()+1, encontradosNext.size());
        
-    
     }
     
     @Test
-    public void whenFindByMedicoFechaDesde_thenReturnList(){
+    public void buscarHorarioDisponible(){
+        Long idMedico = 8L;
         
-        Long idMedico = 1L;
-        Date fechaDesde = new Date();
-        List<MedicoHorario> horarios = medicoHorarioRepository.buscarPorMedicoFechaDesde(idMedico, fechaDesde);
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(2021, 11-1, 8, 0, 0, 0);
         
-        System.out.println("=============");
-        System.out.println("total=>"+horarios.size());
+        List<MedicoHorario> horarios = medicoHorarioRepository.buscarPorMedicoFechaDesde(idMedico, calendar.getTime());
+        
+        Assertions.assertTrue(horarios.size() > 0);
         
     }
     

@@ -33,11 +33,11 @@ public class EmpleadoRepositoryMockTest {
         List<Empleado> encontradosPrev = empleadoRepository.findAll();
         
         Empleado empleado01 = Empleado.builder()
-                .nombre("Edwin")
-                .apellidoPaterno("Quispe")
-                .apellidoMaterno("Ramos")
+                .nombre("Ronald")
+                .apellidoPaterno("Torres")
+                .apellidoMaterno("Ubillus")
                 .tipoDocumento("01")
-                .numeroDocumento("43459267")
+                .numeroDocumento("41239267")
                 .build();
         
         empleadoRepository.save(empleado01);
